@@ -1,1 +1,5 @@
-# actions-1
+# Exploring actions
+We will be learning Github actions, a robust automation tool that empowers you to
+- streamline repetitive tasks 
+- automate your software development workflows
+- enhance productivity and code quality
