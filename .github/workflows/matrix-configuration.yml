@@ -3,21 +3,37 @@ name: Matrix Configuration
 on:
     push
 
-jobs: 
-    deploy-on-ubuntu:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Echo Docker details
-        run: docker info
-
-      - name: Run Images
-        run: docker run hello-world
-
-    deploy-on-windows:
-        runs-on: windows-latest
+jobs:
+    deploy:
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest] 
+                images: [hello-world, alpine]
+        runs-on: ${{ matrix.os }}
         steps:
         - name: Echo Docker Details
           run: docker info
 
         - name: Run Images
-          run: docker run hello-world
+          run: docker run ${{ matrix.images }}
+
+
+######## This is an alternative method of running the job above       
+# jobs: 
+#     deploy-on-ubuntu:
+#       runs-on: ubuntu-latest
+#       steps:
+#       - name: Echo Docker details
+#         run: docker info
+
+#       - name: Run Images
+#         run: docker run hello-world
+
+#     deploy-on-windows:
+#         runs-on: windows-latest
+#         steps:
+#         - name: Echo Docker Details
+#           run: docker info
+
+#         - name: Run Images
+#           run: docker run hello-world
